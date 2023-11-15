@@ -37,7 +37,6 @@ const categoryByIdExists = async (id) => {
   }
 };
 
-
 const categoryNameShouldBeUnique = async (name) => {
   //check if name category already exists
   const category = await Category.findOne({ name });
@@ -65,6 +64,16 @@ const productNameShouldBeUnique = async (name) => {
   }
 };
 
+const valideCollection = (collection = "", validCollections = []) => {
+  const valid = validCollections.includes(collection);
+
+  if (!valid) {
+    throw new Error(`Collection ${collection} is invalid - ${validCollections}`)
+  }
+  
+  return true;
+};
+
 module.exports = {
   isValidRole,
   emailExists,
@@ -72,5 +81,6 @@ module.exports = {
   categoryByIdExists,
   categoryNameShouldBeUnique,
   productByIdExists,
-  productNameShouldBeUnique
+  productNameShouldBeUnique,
+  valideCollection
 };
